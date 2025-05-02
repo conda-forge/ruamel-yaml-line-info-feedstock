@@ -17,7 +17,7 @@ source:
     sha256: 968f7311fbe216ad311ba1fb34e5c65a93a09141d07599de4f713711fd89f077
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script:
     - cd dist
