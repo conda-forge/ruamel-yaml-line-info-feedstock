@@ -9,18 +9,13 @@ package:
   version: ${{ version }}
 
 source:
-  - target_directory: dist
-    url: https://pypi.org/packages/source/r/ruamel-yaml-line-info/ruamel_yaml_line_info-${{ version }}.tar.gz
-    sha256: fbc187ea663a92933f94a88eb6bf8e28e9dc581eea97d5435054e05a1005cb6e
-  - target_directory: src
-    url: https://github.com/nh13/ruamel_yaml_line_info/archive/refs/tags/${{ version }}.tar.gz
-    sha256: b3ade0c76f80d71167dc7c91ce8773ab9dab34768dcba82a7d6bbbc8bbdb0831
+  url: https://pypi.org/packages/source/r/ruamel-yaml-line-info/ruamel_yaml_line_info-${{ version }}.tar.gz
+  sha256: fbc187ea663a92933f94a88eb6bf8e28e9dc581eea97d5435054e05a1005cb6e
 
 build:
   number: 0
   noarch: python
   script:
-    - cd dist
     - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
 requirements:
@@ -46,9 +41,8 @@ tests:
         - mypy
     files:
       source:
-        - src/tests/
+        - tests/
     script:
-      - cd src
       - coverage run --source=ruamel_yaml_line_info --branch -m pytest -vv --tb=long --color=yes
       - coverage report --show-missing --skip-covered --fail-under=92
       - mypy -p ruamel_yaml_line_info
@@ -56,7 +50,7 @@ tests:
 about:
   summary: Line information for ruamel.yaml.
   license: MIT
-  license_file: dist/LICENSE
+  license_file: LICENSE
   homepage: https://github.com/nh13/ruamel_yaml_line_info
 
 extra:
